@@ -1,5 +1,4 @@
-#This code was written by Shreyanshu M.
-#This is a simple CLI based notes app
+#A simple CLI based notes app
 
 from datetime import datetime
 import os
