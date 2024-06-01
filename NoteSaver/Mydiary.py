@@ -40,7 +40,7 @@ def wrapp(): #Writing and append
     except:
         print("The file name you entered either does not exist or you entered the name wrong!")
 
-#-----------------------------------------------------------------------------------------------------#
+#main method
 
 if __name__ == "__main__":
     while(True):
