@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: fit-content;
+            height: fit-content;
+        }
+        .container {
+            padding: 2px 16px;
+        }
+
+        .listing {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .listing li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Github Profile</h2>
+    <div class="card" id="card">
+        <ul class="listing" id="listing"></ul>
+    </div>
+</body>
+<script>
+    
+    const requestUrl = 'https://api.github.com/users/shreyanshumis';
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', requestUrl);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            const data = JSON.parse(this.responseText);
+            console.log(data);
+
+            const githubAvatar = data.avatar_url;
+            const githubFollowers = data.followers;
+            const githubFollowing = data.following;
+            const githubCreationDate = data.created_at;
+            const githubRecentActivity = data.updated_at;
+            const githubRepos = data.public_repos;
+            const githubLocation = data.location;
+            const githubLogin = data.login;
+            const yourName = data.name;
+
+            function avatarAdder(avatar) {
+                let img = document.createElement('img');
+                img.src = avatar;
+                img.alt = "Avatar";
+                img.style.width = '15vw';
+                img.style.borderRadius = "20px";
+                return img;
+            }
+
+            const card = document.getElementById('card');
+            const list = document.getElementById('listing');
+
+            function createListItem(text) {
+                const li = document.createElement('li');
+                li.textContent = text;
+                return li;
+            }
+
+            card.appendChild(avatarAdder(githubAvatar));
+
+            list.appendChild(createListItem(`Username: ${githubLogin}`));
+            list.appendChild(createListItem(`Name: ${yourName}`));
+            list.appendChild(createListItem(`Location: ${githubLocation}`));
+            list.appendChild(createListItem(`Created at: ${githubCreationDate}`));
+            list.appendChild(createListItem(`Recent Activity: ${githubRecentActivity}`));
+            list.appendChild(createListItem(`Repo: ${githubRepos}`));
+            list.appendChild(createListItem(`Followers: ${githubFollowers}`));
+            list.appendChild(createListItem(`Following: ${githubFollowing}`));
+        }
+    }
+    xhr.send(); 
+</script>
+</html>
