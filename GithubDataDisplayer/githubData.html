@@ -8,7 +8,9 @@
         .card {
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
             transition: 0.3s;
+            width: -moz-fit-content;
             width: fit-content;
+            height: -moz-fit-content;
             height: fit-content;
         }
         .container {
@@ -27,13 +29,14 @@
 </head>
 <body>
     <h2>Your Github Profile</h2>
+
     <div class="card" id="card">
         <ul class="listing" id="listing"></ul>
     </div>
 </body>
 <script>
-    
-    const requestUrl = 'https://api.github.com/users/shreyanshumis';
+    const userInput = prompt("Please enter your github username:");
+    const requestUrl = `https://api.github.com/users/${userInput}`;
     const xhr = new XMLHttpRequest();
     xhr.open('GET', requestUrl);
     xhr.onreadystatechange = function() {
